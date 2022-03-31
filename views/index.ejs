@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<head>
+  <title>Chat App</title>
+  <script defer src="http://localhost:5000/socket.io/socket.io.js"></script>
+  <script defer src="/services/sockets.js"></script>
+</head>
+<body>
+  <div id="group-container">
+    <% Object.keys(groups).forEach(group => { %>
+      <div><%= group %></div>
+      <a href="/<%= group %>">Join</a>
+    <% }) %>
+  </div>
+  <form action="/group" method="POST">
+    <input name="group" type="text" required>
+    <button type="submit">New group</button>
+  </form>
+</body>
+</html>
