@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "ea01c17b-6264-42ff-9cfa-33958cc61905",
+		"name": "Chat-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET server details",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6IjYwNTc5ZDExNWZiOWYyMjhkMDA2OGZkYyJ9LCJpYXQiOjE2MzY4NDAyNzgsImV4cCI6MTYzNjg0Mzg3OH0.A8E7tNRm1mOO8hD5oKVNxnF2vOulffHzv-jzKsaBDRo",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register a user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6IjYwNTc5ZDExNWZiOWYyMjhkMDA2OGZkYyJ9LCJpYXQiOjE2MzY4NDAyNzgsImV4cCI6MTYzNjg0Mzg3OH0.A8E7tNRm1mOO8hD5oKVNxnF2vOulffHzv-jzKsaBDRo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"User3\",\r\n    \"email\": \"User3@users.com\",\r\n    \"password\": \"User3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/user/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6IjYwNTc5ZDExNWZiOWYyMjhkMDA2OGZkYyJ9LCJpYXQiOjE2MzY4NDAyNzgsImV4cCI6MTYzNjg0Mzg3OH0.A8E7tNRm1mOO8hD5oKVNxnF2vOulffHzv-jzKsaBDRo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"User3@users.com\",\r\n    \"password\": \"User3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7fSwiaWF0IjoxNjQ4NzQ3MjA4LCJleHAiOjE2NDkxMDcyMDh9.L9YQAWZbNTHUMpHO4Y_yfK-7xU2mfAIPRaz4Ut_N08g",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"search_query\": \"user2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/user/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
