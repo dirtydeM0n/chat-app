@@ -5,6 +5,7 @@ const User = require("../models/Users");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Users = require("../models/Users");
+const { jwt_secret } = require("../../constanst");
 
 // could've written a separate route and controller for each entity. Doing this to save time
 // register a user
@@ -37,17 +38,12 @@ router.post("/register", async (req, res) => {
         id: user.id,
       },
     };
-    jwt.sign(
-      payload,
-      config.get("jwtSecret"),
-      { expiresIn: 360000 },
-      (err, token) => {
-        if (err) throw { message: err };
-        return res
-          .status(200)
-          .json({ success: true, message: "Registered successfully", token });
-      }
-    );
+    jwt.sign(payload, jwt_secret, { expiresIn: 360000 }, (err, token) => {
+      if (err) throw { message: err };
+      return res
+        .status(200)
+        .json({ success: true, message: "Registered successfully", token });
+    });
   } catch (err) {
     console.error(err.message);
     return res.status(400).send("Error while registering user");
@@ -84,31 +80,26 @@ router.post("/login", async (req, res) => {
       },
     };
 
-    jwt.sign(
-      payload,
-      config.get("jwtSecret"),
-      { expiresIn: 360000 },
-      (err, token) => {
-        if (err) throw { message: err };
-        return res
-          .status(200)
-          .json({ success: true, message: "Logged in successfully", token });
-      }
-    );
+    jwt.sign(payload, jwt_secret, { expiresIn: 360000 }, (err, token) => {
+      if (err) throw { message: err };
+      return res
+        .status(200)
+        .json({ success: true, message: "Logged in successfully", token });
+    });
   } catch (err) {
     console.error(err.message);
-    return res.status(400).send("Error while registering user");
+    return res.status(400).send("Error while loggin in user");
   }
 });
 
 // search user
-router.post("/search", auth_middleware, async () => {
+router.post("/search", auth_middleware, async (req, res) => {
   try {
     const results = await Users.find(
       {
         name: { $regex: `^${req.body.search_query}$`, $options: "i" },
       },
-      { name: true, email: true, id: true }
+      { name: true, email: true, _id: false }
     ).lean();
 
     if (!results.length)
@@ -119,7 +110,7 @@ router.post("/search", auth_middleware, async () => {
     return res
       .status(200)
       .json({ success: true, message: "Search complete", data: results });
-  } catch (error) {
+  } catch (err) {
     console.error(err.message);
     return res.status(400).send("Error while searching user");
   }

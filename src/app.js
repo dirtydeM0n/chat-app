@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
@@ -12,9 +13,7 @@ app.use(express.json({ extended: false })); // allows us to get data in req.body
 mongoose
   .connect(mongo_uri, {
     useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true, // deprecated
-    useFindAndModify: false, // because findOneAndUpdate is deprecated
+    useUnifiedTopology: true,
   })
   .catch((err) => console.error(err));
 
